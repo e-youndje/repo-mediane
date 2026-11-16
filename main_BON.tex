@@ -1,0 +1,1500 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\usepackage{xcolor}
+\usepackage[a4paper,textheight=24cm,textwidth=15.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage[]{libertinus}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmonofont[Scale=0.92]{Latin Modern Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand\indica{\,\rlap{{\rm \Large 1}}\kern.30em \mbox{\rm \Large l}}
+
+ 
+
+
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{orcidlink}
+\usepackage{lineno}
+\usepackage{unicode-math}
+\setmathfont{Libertinus Math}
+\usepackage{draftwatermark}
+\usepackage{adjustbox}
+\usepackage{float}
+
+
+\newcommand\C{{\mathbb C}}
+\newcommand\E{{\mathbb E}}
+\newcommand\F{{\mathbb F}}
+\newcommand\M{{\mathbb M}} % un espace metrique
+\newcommand\N{{\mathbb N}}
+\newcommand\R{{\mathbb R}}
+
+\newtheorem{theorem}{Theorem}    
+\newtheorem{acknowledgement}[theorem]{Acknowledgment}    
+\newtheorem{algorithm}[theorem]{Algorithm}    
+\newtheorem{axiom}[theorem]{Axiom}    
+\newtheorem{case}[theorem]{Case}    
+\newtheorem{claim}[theorem]{Claim}    
+\newtheorem{conclusion}[theorem]{Conclusion}    
+\newtheorem{condition}[theorem]{Condition}    
+\newtheorem{conjecture}[theorem]{Conjecture}    
+%\newtheorem{corollary}[theorem]{Corollary} 
+\newtheorem{corollary}{Corollary}   
+\newtheorem{criterion}[theorem]{Criterion}    
+%\newtheorem{definition}[theorem]{Definition} 
+\newtheorem{definition}{Definition}  
+\newtheorem{example}[theorem]{Example}    
+\newtheorem{exercise}[theorem]{Exercise}    
+\newtheorem{lemma}{Lemma}     
+\newtheorem{notation}[theorem]{Notation}    
+\newtheorem{problem}[theorem]{Problem}    
+\newtheorem{proposition}{Proposition}
+%\newtheorem{lemma}{Lemma}    
+\newtheorem{remark}[theorem]{Remark}    
+\newtheorem{solution}[theorem]{Solution}    
+\newtheorem{summary}[theorem]{Summary}   
+
+
+% Tables converted from `longtable` to `table` (see pdf-table-fit.lua, used
+% to shrink-to-fit overly wide tables) must stay in place like `longtable`
+% does, instead of floating to the top of the page/document.
+\floatplacement{table}{H}
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{algorithm}{}{\usepackage{algorithm}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{algpseudocode}{}{\usepackage{algpseudocode}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\makeatother
+    \makeatletter
+    \newcommand\fs@nocaption{
+      \def\@fs@cfont{\bfseries}
+      \let\@fs@capt\floatc@plain
+      \def\@fs@pre{}%
+      \def\@fs@post{\kern2pt\hrule}%
+      \def\@fs@mid{\hrule\kern2pt}%
+      \let\@fs@iftopcapt\iftrue}
+    \makeatother
+  
+\captionsetup[algorithm]{justification=raggedright}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Median search: dichotomy and gradient descent},
+  pdfauthor={Elie Youndje},
+  pdfkeywords={\xmpquote{Mean}, \xmpquote{median}, \xmpquote{order
+statistics}, \xmpquote{sort}, \xmpquote{sum of absolute deviations}},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Median search: dichotomy and gradient descent}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Dichotomy and gradient algorithms}
+\author{Elie Youndje}
+\date{2026-11-11}
+\begin{document}
+\definecolor{computo-blue}{HTML}{034E79}
+
+% Neutral header for drafts/submissions: no Computo branding, so the PDF can
+% travel to HAL, PCI, arXiv, double-blind reviewers, etc. without implying
+% any relationship to the journal beyond a discreet mention.
+\begin{center}
+  {\Large\bfseries Median search: dichotomy and gradient descent}
+  \\[.3cm]{\large Dichotomy and gradient algorithms}
+\end{center}
+
+\bigskip
+\begin{center}
+      \textbf{Elie
+Youndje}\textsuperscript{1}~\orcidlink{0000-0001-8546-4530}{\renewcommand{\thefootnote}{\fnsymbol{footnote}}\footnote{Corresponding author: \href{mailto:elie.youndje@univ-rouen.fr}{elie.youndje@univ-rouen.fr}}}\quad
+  
+  \smallskip
+  {\small
+      \textsuperscript{1}Mathematics, Univ Rouen Normandie, CNRS,
+Normandie Univ, LMRS UMR 6085\quad
+    }
+
+  \bigskip
+
+  Date published: 2026-11-11 \quad Last modified: 2026-11-11
+  \end{center}
+
+\bigskip
+\begin{abstract}
+This paper shows how to compute the median of a sample by minimizing the
+sum of absolute deviations function. The minimization is done using the
+left hand gradient of the sum of absolute deviations. The point where
+the left hand derivative changes sign is searched using dichotomy or
+gradient descent. Simulations conducted in the article reveal that these
+approaches are very promising. In particular, for each sample size
+considered, there is one among our methods that outperforms the matlab
+build-in function in terms of runtime.
+\end{abstract}
+
+\noindent%
+{\it Keywords:} Mean, median, order statistics, sort, sum of absolute
+deviations
+\vfill
+
+\DraftwatermarkOptions{stamp=true, colorspec=0.9, text={\rm submitted}}
+\linenumbers
+
+\floatname{algorithm}{Algorithm}
+
+\renewcommand*\contentsname{Contents}
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\section{Introduction}\label{introduction}
+
+Let \(X\) be a random variable, \(X_1,\ldots,X_n\) be an i.i.d. sample
+from \(X.\) Let \(X_{(1)},\ldots,X_{(n)}\) be the order statistics
+associated with \(X_1,\ldots,X_n.\) As we learnt in school the
+(empirical) mean (\(\bar{\mu}_0\)) and median (\(\bar{\mu}_1\)) of \(X\)
+are defined respectively by \[\bar{\mu}_0=\frac{1}{n}\sum_{i=1}^n X_i,\]
+\[\bar{\mu}_1   = \begin{cases}
+	X_{(m+1)}  & \text{if}\  n=2m+1, \\
+	\frac{X_{(m)}+X_{(m+1)}}{2} & \text{if}\ n=2m.
+\end{cases}\] Both quantities \(\bar{\mu}_0\) and \(\bar{\mu}_1\)
+are used in practice as estimates of the ``center" of the distribution
+of \(X.\) Let \(F\) be the cumulative distribution function of \(X,\)
+the theoretical mean of \(X\) defined by \[\mu_0=\int x \mathrm{d}F(x)\]
+does not always exist. To the contrary the theoretical median of \(X\)
+given by \[\mu_1=\inf\{ x:\ \  F(x)\ge \frac{1}{2}\}\] always exists.
+Besides this existence issue, medians are very important in practice
+because they are resistant to outliers. This means that they are not
+heavily affected by a very high or a very low value of the data. Median
+computation is used in many fields. For seismic data processing we can
+cite (Stewart 1985). In image processing, median filters are preferred
+to mean filters because of their edge enhancement properties.
+Applications involving median computation can be found in (Huang et al.
+1979), (Nodes and Gallagher 1982), (Azzini et al. 2023) and (Yin et al.
+1996). As mention in the literature (see for instance (Tibshirani
+2009)), median is more appropriate than mean to measure the center of a
+population. However the appealing qualities of the median come with a
+high price: computing the median takes more time than computing the
+mean. For this reason, many methods for computing median have been
+devised. The methods based on the''divide and conquer" principal are
+developed in (Hoare 1961), (Tibshirani 2009) and (Azzini et al. 2023).
+These methods are very interesting and significantly faster than the
+``sort then select" method implemented in most computer languages.
+However they do not always give us what we expect to get. Indeed, when
+\(n=2m\), they return \(X_{(m)}\) or \(X_{(m+1)}\) and none of these
+quantities is the median given in textbooks. In (Satman 2022) is
+introduced a novel iterative method to approximate the median. Although
+this method appears to be interesting, it is not shown in the paper, how
+to choose the parameter used in its construction. Another class of
+iterative methods that can be used to compute the median of a data set
+is the subgradient. The sugradient method is a conventional means to
+minimize a nonsmooth function, therefore it can be used to compute the
+median by minimizing the sum of absolute deviations. Good expositions of
+the subgradient algorithm can be found in (Tibshirani 2017) and (Ma
+2019). The class of subgradient methods shares some characteristics of
+the methods introduce in this paper:
+
+\begin{itemize}
+	\item[--] They build sequences ``converging" to the median.
+	\item[--] The sequences are build using the left hand side (one-sided) derivative of the sum of absolute deviations.
+\end{itemize}
+The approaches of this paper and the class of subgradient methods also have some ingredients or properties that are very
+different. For example:
+\begin{itemize}
+	\item[--] The subgradient class  builds  a sequence $(x_n,n\in \N)$ such that
+	\[ \lim x_n=\bar{\mu}_1 \]
+	where $\bar{\mu}_1$ is the sample median. While the class of methods developed in this article builds  two (adjacent)
+	sequences $(a_n,n\in \N), \quad (b_n,n\in \N) $ such that 
+	\[ a_n\leq \bar{\mu}_1 \leq b_n \quad \text{and}\quad \lim( b_n-a_n)=0.\]
+	
+	\item[--] The output of our approaches is the \textit{exact} median $\bar{\mu}_1,$ whereas the output of the subgradient class
+	is an \textit{approximate} value of $\bar{\mu}_1.$
+\end{itemize}
+The aim of this
+article is to introduce  methods which return the median as they  teach it in school and at the same time, on average,
+outperforms the conventional ``sorting" method for ``large'' sample size.
+
+The next section contains  theoretical foundations of the  methods introduced in this paper. The common principles of our algorithms
+are presented in Section~3. The dichotomic method is outlined in Section 4 and the last section of the paper contains the gradient descent
+method.
+
+
+
+
+
+
+\section{Theoretical preliminaries }\label{sec:2}
+Let $x\in\R$, the sum of absolute deviation of the sample $X_1,\ldots,X_n$ from $x$ is given
+by
+\[
+\varphi(x)=\sum_{i=1}^{n}\lvert X_i-x\rvert.
+\]
+It is well-known that the median of $X_1,\ldots,X_n$ is a minimizer of the  function $\varphi$, in
+others words
+\[
+\varphi( \bar{\mu}_1) =\inf_{x} \varphi(x).
+\]
+Lemma 1 below is fundamental, it gives us useful information about $\varphi.$ The proof of Lemma 1 is in the supplementary material. In order to state this result
+we introduce the following notations. Let $Y_1<Y_2<\ldots<Y_m$  be such that
+\[
+\{X_1,\ldots,X_n\}=\{Y_1,\ldots,Y_m\}.
+\]
+Set 
+\begin{align*}
+	S = &\{Y_1,\ldots,Y_m\}, \\
+	I_0= & (-\infty,Y_1), \quad I_1=[Y_1,Y_2),\ldots, I_{m-1}=[Y_{m-1},Y_{m}),\quad I_m=[Y_m,+\infty).
+\end{align*}
+%%%%%      
+\begin{lemma} {\ }
+	\begin{itemize}
+		\item[(i)] For $k\in \{0,\ldots,m\},$  $\exists \alpha_k, \beta_k\in\R$ such that 
+		\[
+		\varphi(x)=\alpha_k x+ \beta_k, \quad \forall x\in I_k.\quad \quad\quad\quad
+		\]	
+		\item[(ii)]  For $j\in\{1,\ldots,m\}$, $\exists q_j\in\N^*$ such that
+		\[
+		\alpha_j- \alpha_{j-1}=2 q_j.
+		\]      
+		\item[(iii)] $\quad \quad-n=\alpha_0 <\alpha_1<\ldots <\alpha_{m-1}<\alpha_m=n.	$
+	\end{itemize}	     
+\end{lemma} 
+
+
+
+
+
+We are now going to introduce the definitions and notations, we will use to state the next theorem.
+The right hand derivative of $\varphi$ at $a\in \R$ is defined by
+\[
+\varphi'_+(a)=\lim_{\substack{h\to 0 \\ h>0}} \frac{\varphi(a+h)-\varphi(a)}{h}.
+\]
+Similarly the left hand derivative is given by
+\[
+\varphi'_-(a)=\lim_{\substack{h\to 0 \\ h<0}} \frac{\varphi(a+h)-\varphi(a)}{h}.
+\]
+Let $a_0\in\R,$ $a_0$ is called
+\begin{itemize}
+	\item  [--] a \textbf{mininum} of $\varphi$ if
+	\[
+	\forall x\in\R,\  \varphi(a_0)\leq \varphi(x),
+	\]
+	\item  [--] an \textbf{absolute mininum (am)} of $\varphi$ if
+	\[
+	\forall x\in\R\setminus\{a_0\},\  \varphi(a_0)< \varphi(x).
+	\]        
+\end{itemize}
+%%%%%%%%%%%%
+In the sequel we dote by $\mathscr{M}$ the set of minimum of $\varphi$ \i.e.
+\[
+\mathscr{M}=\{a\in\R,\ a \ \text{minimun of} \ \varphi\}.  
+\]
+We make use of the following definitions below. 
+%%%%%%%%%%%%%
+\begin{itemize}
+	\item  [--] A point $a_1$ of $\R$ is called the   \textbf{least mininum (lm)} of $\varphi$ if
+	\[
+	a_1=\min\left(\mathscr{M}\right).
+	\]
+	\item  [--] A point $a_2$ of $\R$ is called the   \textbf{greatest mininum (gm)} of $\varphi$ if
+	\[
+	a_2=\max\left(\mathscr{M}\right).
+	\]
+\end{itemize}
+We have the following foundation  result whose proof is in the supplementary material.  
+
+\begin{theorem} For any data set $S=\{X_1,\ldots,X_n\},$ one and only one of the following two statements  ((a), (b)) is true.
+	\begin{itemize}
+		\item[(a)] $\varphi$ has an \textbf{absolute mininum (am)} $a_0$ satisfying:
+		\begin{itemize}
+			\item[(i)] $a_0\in S,$
+			\item[(ii)] $a_0$ is the only point satisfying
+			\[
+			\varphi'_-(a_0)<0 \quad\text{and}\quad \varphi'_+(a_0)>0.
+			\]
+		\end{itemize}	  
+		\item[(b)] $\varphi$ has a \textbf{lm} $a_1$    and a \textbf{gm} $a_2.$ Furthermore
+		in this case we have:
+		\begin{itemize}
+			\item[(i)] $a_1,\ a_2\in S,$
+			\item[(ii)] $\mathscr{M}=[a_1,\ a_2]$
+			
+			\item[(iii)] $a_1$ is the only point satisfying
+			\[
+			\varphi'_-(a_1)<0 \quad\text{and}\quad \varphi'_+(a_1)=0,
+			\]
+			\item[(iv)] $a_2$ is the only point satisfying
+			\[
+			\varphi'_-(a_2)=0 \quad\text{and}\quad \varphi'_+(a_2)>0.
+			\]
+		\end{itemize}	 
+	\end{itemize}	
+	
+\end{theorem} 
+
+
+\begin{corollary}  For a data set $S=\{X_1,\ldots,X_n\},$  with $n=2p+1,$
+	$\varphi$ has an \textbf{absolute mininum (am)} $a_0$ satisfying:
+	\begin{itemize}
+		\item[(i)] $a_0\in S,$
+		\item[(ii)] $a_0$ is the only point satisfying
+		\[
+		\varphi'_-(a_0)<0 \quad\text{and}\quad \varphi'_+(a_0)>0.
+		\]
+	\end{itemize}	
+\end{corollary}
+
+
+
+
+
+We are now going to introduce algorithmically convenient formulas for the left hand and right hand derivative
+of the function $\varphi.$ To state these results we need some notations. For $v\in \R,$ set
+\begin{align*}
+	L_v= &\{i:\  X_i<v\},\quad R_v=\{i:\  X_i>v\},\\
+	l_v= &\#(L_v)\quad \text{and}\quad r_v= \#(R_v).
+\end{align*}
+We have the following lemma.
+
+
+\begin{lemma} For $v\in \R,$ we have:
+	\[
+	\varphi'_-(v)=-n+2l_v \quad\text{and}\quad \varphi'_+(v)=n-2r_v . \]
+\end{lemma}
+
+
+
+Given $u,v\in \R,$ the next result gives the relationships between $l_u$ and $l_v$ and between $r_u$ and $r_v$.
+These relationships will help in our algorithms, to speed   up the computation of $ \varphi'_-(v)$  when    $\varphi'_-(u)$
+is known. To state this result, we introduce the following notations. For $u,v \in \R,$ $u<v$ we set
+\begin{align*}
+	E_u= &\{i:\ X_i=v\},\quad e_u=\#(E_u),\\
+	S_{u,v}=&\{i:\ u< X_i<v\},\quad s_{u,v} =\#(S_{u,v}).
+\end{align*}
+If $l_v,\ r_v,\ e_v, \ e_u,$ and $s_{u,v}$ are known, the lemma below shows that we can deduce
+$l_u$ and $r_u.$
+
+
+\begin{lemma} For $u<v$ we have:
+	\begin{align*}
+		(i)\  \, l_u=& l_v-e_u-s_{u,v},\\
+		(ii)\   r_u=& r_v+e_v+s_{u,v}.
+	\end{align*}
+\end{lemma}
+The proofs of Lemma 2 and Lemma 3 are in the supplementary material.
+
+
+\section{Basic principles of our methods }\label{sec:3}
+
+In this section, we introduce notations and properties common to both dichotomy and gradient descent.
+Let $f:\R\rightarrow \R$ be a convex and differentiable function. It is well known that a minimizer of
+$f$ is a solution of the equation $f'(x)=0.$ When it is not possible to solve $f'(x)=0$ analytically,
+usually dichotomy or gradient descent is used to build an approximate solution. In this paper, we want
+to minimize the convex function $\varphi$, however $\varphi$ is not differentiable. Nonetheless, $\varphi_{-}'(t)$
+exists for all $t.$ In this section we show how we can use $\varphi_{-}'(t)$ to compute \textbf{lm}.
+
+Lemma~4 belows gives a useful characterization of \textbf{lm}; its proof is the supplementary material.
+\begin{lemma}
+	\[
+	\mathbf{lm}=\max\{ v:\quad \varphi_{-}'(v)<0
+	\}.
+	\]	
+\end{lemma}
+
+
+
+
+Lemma 4 is very interesting, it can be used to test whether an interval contains \textbf{lm}. Le $a<b$, we have:
+\begin{itemize}
+	\item if  $\varphi_{-}'(a)<0$ and $\varphi_{-}'(b)\ge 0$ then $\mathbf{lm}\in [a,\ b[;$
+	\item if  $\varphi_{-}'(a)\ge 0$ then $\mathbf{lm}\notin [a,\ b];$
+	\item if  $\varphi_{-}'(b)< 0$ then $\mathbf{lm}\notin [a,\ b[.$
+\end{itemize} 
+The function $\varphi_{-}'(v)$ plays important roles in the rest of the paper. To save typing and space we set
+\[
+\rho(v)=\varphi_{-}'(v).
+\]
+We now introduce some notations used in the sequel. Let $U$ be a vector in $\R^p$ that is $U=(u_1,\ldots,u_p)$ for
+$I=(i_1,\ldots,i_q)\in \{1,2,\ldots,p\}^q \ (q\leq p)$ we set
+\[
+U(I)=(u_{i_1},u_{i_2},\ldots,u_{i_q}).
+\]
+Let $e\in\R,$ $K=\{i\ : \ u_i<e\}=\{j_1,\ldots,J_{q_1}\}$ with $j_1<j_2<\ldots<j_{q_1}.$ We define the vector
+$(U<e)$ by
+\[
+(U<e)=U(J)\quad \text{where}\quad J=(j_1,\ldots,J_{q_1}).
+\]
+Likewise the vector $(U\ge e)$ is defined by 
+\[
+(U\ge e)=U(J')
+\] 
+where
+\[
+J'=(j_1',\ldots,J_{q_2}'),\quad \{j_1',\ldots,J_{q_2}'\}=\{i\ : \ u_i\ge e\}\quad \text{and}\quad j_1'<j_2'<\ldots<j_{q_2}'.
+\]        
+Let $V=(v_1,\ldots,v_m)\in \R^m,$ in what follows we write $U\subseteq V$ if every component of $U$ is a component
+of $V,$ said otherwise $u_i\in \{v_1,\ldots,v_m\}.$
+For a vector $V=(v_1,\ldots,v_m)$ we define $\lvert V\rvert$ as
+\[
+\lvert V\rvert=\mathrm{card}(\{v_i,\ 1\leq i\leq m \}).
+\]
+
+The common ideas used in the methods considered in this article consists in building a sequence
+$\left(a_i,b_i,c_i,M_i \right)_{i\in \N^*}$ such that:
+\begin{itemize}
+	\item[(i)] $a_i\leq c_i\leq b_i,$\quad $\mathbf{lm}\in [a_i,\ b_i],$\quad  $[a_{i+1},\ b_{i+1}] \subseteq [a_i,\ b_i] ;$
+	\item[(ii)] $M_i\subseteq X=(X_1,\ldots,X_n),$\quad $M_{i+1}\subseteq M_i;$
+	\item[(iii)] $\exists m_0\in \N,\quad a_{m_0}=\mathbf{lm}=b_{m_0}.$
+\end{itemize}
+Below in Step-1, Step-2,  Step-3 we present the construction of the sequence $\left(a_i,b_i,c_i,M_i \right).$
+
+
+\begin{itemize}
+	\item[Step-1]  \textit{construction of $\left(a_1,b_1,c_1,M_1 \right)$ }
+	\begin{itemize}
+		\item[$\bullet$] $a_1=\min(S);$
+		\item[$\bullet$]  $b_1=\max(S);$
+		\item[$\bullet$]  $M_1=(X_1,\ldots,X_n);$
+		
+		\item[$\bullet$] \texttt{if} $(a_1=b_1)$
+		\begin{itemize}
+			\item[$\circ$] $c_1= a_1;$
+		\end{itemize}
+		\item[$\bullet$] \texttt{if} $(a_1<b_1)$ 
+		\begin{itemize}     
+			\item[$\circ$] \texttt{choose} $c_1\in ]a_1,\ b_1[;$	
+		\end{itemize}			
+	\end{itemize}            
+	
+	
+	
+	\item[Step-2]  \textit{construction of $\left(a_2,b_2,c_2,M_2 \right)$ }: 
+	\begin{itemize}
+		\item[$\bullet$] $L=(M_1<c_1);$
+		\item[$\bullet$] $R=(M_1>=c_1);$ 	           
+		
+		\item[$\bullet$] \texttt{if} $(\rho(c_1)<0)$
+		\begin{itemize}
+			\item[$\circ$]  \texttt{if} $(L=\emptyset)$
+			\begin{itemize}
+				\item[$\diamond$]  $a_2=\min(R);$
+				\item[$\diamond$] $b_2=b_1;$
+			\end{itemize}             
+			\item[$\circ$] \texttt{if} $(L\neq\emptyset)$ 
+			\begin{itemize} 
+				\item[$\diamond$] $a_2=c_1;$
+				\item[$\diamond$] $b_2=b_1;$
+			\end{itemize}    
+			\item[$\circ$] $M_2=R;$
+		\end{itemize}     
+		\item[$\bullet$] \texttt{if} $(\rho(c_1)\ge 0)$  
+		\begin{itemize}			  
+			\item[$\circ$] \texttt{if} $(R=\emptyset)$
+			\begin{itemize}
+				\item[$\diamond$] $b_2=\max(L);$
+				\item[$\diamond$] $a_2=a_1;$
+			\end{itemize}   
+			\item[$\circ$] \texttt{if} $(R\neq\emptyset)$
+			\begin{itemize}
+				\item[$\diamond$] $b_2=c_1;$
+				\item[$\diamond$] $a_2= a_1;$
+			\end{itemize}    
+			\item[$\circ$] $M_2=L;$
+		\end{itemize} 
+		\item[$\bullet$] \texttt{if} $(a_2=b_2)$
+		\begin{itemize}
+			\item[$\circ$] $c_2= a_2;$
+		\end{itemize}   
+		\item[$\bullet$] \texttt{if} $(a_2<b_2)$  
+		\begin{itemize}
+			\item[$\circ$] \texttt{choose} $c_2\in ]a_2,\ b_2[;$	
+		\end{itemize}
+	\end{itemize}
+	
+	
+	\item[Step-3]  \textit{induction step, construction of $\left(a_{k+1},b_{k+1},c_{k+1},M_{k+1} \right)$  }:
+	\begin{itemize}
+		\item[$\bullet$] $L=(M_k<c_k);$
+		\item[$\bullet$] $R=(M_k>=c_k);$ 	           
+		
+		\item[$\bullet$] \texttt{if} $(\rho(c_k)<0)$
+		\begin{itemize}
+			\item[$\circ$]  \texttt{if} $(L=\emptyset)$
+			\begin{itemize}
+				\item[$\diamond$]  $a_{k+1}=\min(R);$
+				\item[$\diamond$] $b_{k+1}=b_k;$
+			\end{itemize}             
+			\item[$\circ$] \texttt{if} $(L\neq\emptyset)$ 
+			\begin{itemize} 
+				\item[$\diamond$] $a_{k+1}=c_k;$
+				\item[$\diamond$] $b_{k+1}=b_k;$
+			\end{itemize}    
+			\item[$\circ$] $M_{k+1}=R;$
+		\end{itemize}     
+		\item[$\bullet$] \texttt{if} $(\rho(c_k)\ge 0)$  
+		\begin{itemize}			  
+			\item[$\circ$] \texttt{if} $(R=\emptyset)$
+			\begin{itemize}
+				\item[$\diamond$] $b_{k+1}=\max(L);$
+				\item[$\diamond$] $a_{k+1}=a_k;$
+			\end{itemize}   
+			\item[$\circ$] \texttt{if} $(R\neq\emptyset)$
+			\begin{itemize}
+				\item[$\diamond$] $b_{k+1}=c_k;$
+				\item[$\diamond$] $a_{k+1}= a_k;$
+			\end{itemize}    
+			\item[$\circ$] $M_{k+1}=L;$
+		\end{itemize} 
+		\item[$\bullet$] \texttt{if} $(a_{k+1}=b_{k+1})$
+		\begin{itemize}
+			\item[$\circ$] $c_{k+1}= a_{k+1};$
+		\end{itemize}   
+		\item[$\bullet$] \texttt{if} $(a_{k+1}<b_{k+1})$  
+		\begin{itemize}
+			\item[$\circ$] \texttt{choose} $c_{k+1}\in ]a_{k+1},\ b_{k+1}[;$	
+		\end{itemize}
+	\end{itemize}
+	
+	
+\end{itemize} 	
+\begin{definition}
+	A sequence $\left(\Omega_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ 
+	built recursively by  Step-1---Step-3 presented above is called a generic sequence.
+\end{definition}      
+
+In Proposition 1--4 below are listed some interesting properties of the sequence  $\left(a_i,b_i,c_i,M_i \right)_{i\in \N^*}.$
+The proofs of these results are in the supplementary material.
+\begin{proposition} 
+	If $\lvert M_k\rvert\geq 2,\  \lvert M_{k+1}\rvert =\lvert M_k\rvert$ and   $\lvert M_{k+2}\rvert=\lvert M_k\rvert$ then
+	\[
+	\lvert M_{k+3}\rvert < \lvert M_k\rvert.
+	\]
+\end{proposition}
+
+
+
+\begin{proposition} 
+	If $\lvert M_k\rvert\geq 2,$  $\exists j>k$ such that:  
+	\[
+	\lvert M_{j}\rvert < \lvert M_k\rvert.
+	\]
+\end{proposition}
+
+
+
+
+\begin{proposition} There exists $p_0\in\N$ 
+	such that:  
+	\[
+	\lvert M_{p_0}\rvert =1.
+	\]
+\end{proposition}
+
+
+
+\begin{proposition} There exists $m_0\in\N$ 
+	such that:  
+	\[
+	a_{m_0}=\mathbf{lm}= b_{m_0}.
+	\]
+\end{proposition}
+
+
+
+
+
+
+\section{Dichotomy}\label{sec:3}
+This approach is based on Lemma 4. It is very similar to the classical dichotomy used to find the zero of a function.
+The main idea here is to use $\varphi_{-}'(v)$ to build a sequence converging to $\mathbf{lm}.$ The dichotomic
+sequence is introduce in Definition 2 below.
+
+
+\begin{definition}
+	A sequence $\left(\mathscr{A}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ is called a dichotomic
+	sequence if it is built recursively by  Step-a1  and  Step-a2 presented in the supplementary material.
+\end{definition}    
+
+
+%%%%%%%%%%%%%% 	
+It is clear that a dichotomic sequence is a generic sequence, thus we have: $\lim a_k=\mathbf{lm}=\lim b_k.$
+The dichotomic algorithm  is implemented in the (matlab) mex-file median\_rouen\_dic given in the supplementary material.
+Table~1 contains  computational times of median\_rouen\_dic and those of the build-in matlab function median
+when the sample is ``small". This table shows clearly that, the performance of  median\_rouen\_dic is superior
+to that of matlab median when the sample size is between 10 and 150.
+
+From Table~2 we see that, the runtime of the program median\_rouen\_dic increases with the sample size $n.$ This is because the number of 
+comparisons increase with $n.$  The runtime of matlab median 
+also increases with the sample size. It also appears from this table that the performance of median\_rouen\_dic is slightly
+superior
+to that of matlab median for ``medium" sample sizes.
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_dic and the build-in matlab median  over $500$ replications.}
+	\label{table1}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{small sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_dic} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=10 & 0.00278   & 0.00287  & 0.9676 \\
+		\midrule
+		n=30 & 0.00323   & 0.00343  & 0.9417 \\
+		\midrule
+		n=50 & 0.00495   & 0.00539  & 0.9170 \\
+		\midrule
+		n=70 & 0.00297   & 0.00330  & 0.8986 \\
+		\midrule
+		n=90 & 0.00364   & 0.00399  & 0.9137 \\
+		\midrule
+		n=110 & 0.00494  & 0.00543  & 0.9099\\
+		\midrule
+		n=130 & 0.00473  & 0.00527  & 0.8975 \\
+		\midrule
+		n=150 & 0.00431  & 0.00482  & 0.8949 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_dic and the build-in matlab median  over $500$ replications.}
+	\label{table2}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{Medium sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_dic} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=5000 & 0.04232  & 0.04650    &  0.9102       \\
+		\midrule
+		n=8000 & 0.06728  & 0.07394    &  0.9099      \\
+		\midrule
+		n=11000 & 0.08623 & 0.09419    &  0.9155    \\
+		\midrule
+		n=14000 & 0.10798 & 0.11757    &  0.9184  \\
+		\midrule
+		n=17000 & 0.12838  & 0.14049   &  0.9138  \\
+		\midrule
+		n=20000 & 0.15256  & 0.16782   & 0.9090     \\
+		\midrule
+		n=23000 & 0.17211  & 0.18817   & 0.9147     \\
+		\midrule
+		n=26000 & 0.19742  & 0.21676   & 0.9107     \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_dic and the build-in matlab median  over $500$ replications.}
+	\label{table3}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{large sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_dic} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=1000000 & 10.2957 & 8.8177   &  1.1676   \\
+		\midrule
+		n=2000000 & 21.4221 & 22.3411  &  0.9589 \\
+		\midrule
+		n=3000000  & 31.9876 & 33.2991 &  0.9606 \\
+		\midrule
+		n=4000000 &  36.9473 & 36.4557   & 1.0135 \\
+		\midrule
+		n=5000000  & 62.2457 &  67.5856  & 0.9210  \\
+		\midrule
+		n=6000000  & 75.2828   & 81.3021 & 0.9260   \\
+		\midrule
+		n=7000000 &  85.8764   & 92.7082 & 0.9263   \\
+		\midrule
+		n=8000000 &  98.4278  &  106.6332 &  0.9230    \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+In Table ~3 is displayed the results of the computations when the sample sizes are ``large". As in Table~2, the runtimes of
+both methods increase with the sample size. In this table, no method   is superior to the other. However
+median\_rouen\_dic  is superior when the
+sample size is between 5 000 000 and 8 000 000.
+
+
+
+\section{Gradient descent}\label{sec:4}
+
+
+
+
+
+
+
+
+\subsection{Plain descent method }\label{sec:4.1}
+
+This approach borrows a lot from the classical gradient descent algorithm. Before its introduction, let us
+recall the basic tools of the gradient descent. Let $f:\R\longrightarrow \R$ be a convex
+differentiable function. Assume that we want to find a minimizer  of $f.$ The gradient descent
+method consists in building a sequence $(x_n)_{n\in\N}$ converging to a  minimizer of $f.$
+The sequence is constructed as follows:
+\begin{itemize}
+	\item Select an arbitrary starting point $x_0;$
+	\item Choose a learning rate $\delta >0;$
+	\item The sequence is defined recursively as
+	\[x_{n+1}=x_n -\delta f'(x_n).\]
+\end{itemize}
+%%%%%%%%%
+The theory shows that, under certain regularity conditions of $f,$ there exists $\delta_0>0$ 
+such that
+\[
+0<\delta<\delta_0 \implies x_n\quad\text{converges to}\quad w_0
+\]
+where $w_0$ is a minimizer of $f.$ Some comments regarding the construction of the sequence
+are in order here. If $f'(x_n)>0,$ then f is increasing in a neighborhood of $x_n.$ Thus, the minimizer
+of $f$ is less than $x_n,$ this is why $x_{n+1}$ is chosen such that
+\[
+x_{n+1}=x_n -\delta f'(x_n)<x_n.
+\]
+If $f'(x_n)<0,$ then
+\[
+x_n<  x_{n+1}=x_n -\delta f'(x_n).
+\]
+This means that $ x_{n+1}$ is chosen to the left of $x_n$ when the gradient is positive and to
+the right when the gradient is negative: we move against the gradient. We now illustrate the working
+of the gradient descent on a simple example. Let $a$ be a fixed real and $f(x)={\frac{1}{2}(x-a)^2}.$
+It is clear that $f$ has a unique minimum at $w_0=a.$ We have:\quad $f'(x)=x-a,$ therefore
+the sequence $(x_n)_{n\in \N}$ is defined recursively by
+\begin{align*} 
+	x_{n+1} & =x_n-\delta (x_n-a) \\
+	& =(1-\delta) x_n+ \delta a.      
+\end{align*}
+Because $a=(1-\delta) a+\delta a,$ we see that
+\[
+x_{n+1}-a   =(1-\delta) (x_n-a)\]
+it follows that
+\[
+x_n-a=(1-\delta)^n (x_0-a)\iff x_n=a+ (1-\delta)^n (x_0-a).
+\]        
+Therefore we have:
+\[
+\lim x_n=a \iff -1<1-\delta <1\iff 0<\delta<2.
+\]
+
+
+We introduce the following definition.    
+\begin{definition}
+	A sequence $\left(\mathscr{B}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ is called a gradient descent 
+	sequence if it is built recursively by  Step-b1  and  Step-b2 given in the supplementary material.
+\end{definition}    
+
+
+
+Proposition 5 below will allow us to state some properties of a gradient descent sequence.
+Let $a<b,$ and set $m=\mathrm{card}(\{i:\ a\leq X_i\leq b\})$. We have the following useful result.
+
+\begin{proposition} If $\varphi_{-}'(a)<0$ and $\left(\varphi_{-}'(b)>0\right.$ or 
+	$\left( \varphi_{-}'(b)=0 \right.$ and $\left.\left.\varphi_{+}'(b)>0\right)\right)$ then
+	%%%%%%%% 
+	\[
+	-1<\frac{\varphi_{-}'(a)}{2m}<0.
+	\]
+\end{proposition}
+The proof of Proposition 5 is in the supplementary material.
+
+
+We now present the intuition behind the gradient descent sequence. Let $a<b,$ we assume that $\varphi_{-}'(a)<0 \quad\text{and}\quad \varphi_{+}'(b)>0$,
+so that $\mathbf{lm}, \mathbf{gm}\in [a,\ b].$  We need the following notations
+\[
+M=(a\leq M_1\leq b)\quad\text{where}\quad M_1=(X_1,\ldots,X_n)
+\] 
+thus $X_i$ is a component of the vector M if $a\leq X_i\leq b$. To save space we set
+\[
+M=(Z_1,\ldots,Z_m)
+\]
+therefore we assume that $\mathtt{length}(M)=m=\mathrm{card}\{i:\ a\leq X_i\leq b\}.$ In what follows it is
+important to remember that $\mathbf{lm}$ and $\mathbf{gm}$ are components of the vector $M.$
+Given $a,b,M,m$ defined above, the gradient descent
+algorithm chooses $c\in(a,\ b)$ by the formula
+\[
+c= a -\frac{\varphi_{-}'(a)}{2m} (b-a).
+\]
+We want to explain how this formula is obtained. We also assume that $n=2p$ and $\mathbf{lm}<\mathbf{gm},$ because
+the intuition is easier to ``see'' in this situation. We set
+\begin{align*}
+	r_M(\mathbf{lm})= & \sum_{j=1}^m\indica_{[Z_i \leq \mathbf{lm} ]},\\
+	t_0=a, & \quad t_j=a+ \frac{j}{m}(b-a),\quad j=1,\ldots,m.
+\end{align*}
+The gradient descent algorithm chooses $t_{j_0}$ in $(a,\ b)$ if
+\[
+r_M(\mathbf{lm})=j_0.
+\]
+This means that the chosen point is ``close'' to $b$ when $r_M(\mathbf{lm})$ is large and ``close'' to $a$
+when $r_M(\mathbf{lm})$ is small. Indeed,  let $c\in (\mathbf{lm},\  \mathbf{gm}),$ we have
+\begin{align*}
+	\varphi_{-}'(c)=0 &=\varphi_{-}'(a)+2\sum_{i=1}^n \indica_{[X_i <c]} \indica_{[a\leq X_i \leq b]}\\
+	&=\varphi_{-}'(a)+2\sum_{j=1}^m \indica_{[Z_i <c]}\\ 
+	&=\varphi_{-}'(a)+2 r_M(\mathbf{lm}). 
+\end{align*}
+It follows that
+\[
+r_M(\mathbf{lm})=-\frac{\varphi_{-}'(a)}{2}
+\]
+hence
+\begin{align*}
+	c= & a -\frac{\varphi_{-}'(a)}{2m} (b-a)\\
+	= & a+\frac{r_M(\mathbf{lm})}{m}(b-a)\\
+	= & t_{r_M(\mathbf{lm})}.
+\end{align*}
+Why do we talk about gradient descent (regarding this approach)? Because when $a_k<b_k,$ $a_{k+1},b_{k+1}$ and $M_{k+1}$
+are derived from $\left(a_k,b_k,c_k,M_k \right)$ using $\varphi_{-}'(c_k).$ Moreover by setting
+\begin{align*}
+	L_k=& (M_k<c_k),\\
+	R_k= &(M_k\geq c_k),\\
+	m_k=&\mathtt{length}(M_k),\\
+	\lambda_k=&(b_k-a_k)/2m_k,
+\end{align*}
+if $(\varphi_{-}'(c_k)<0)$ and $(L_k\neq \emptyset)$ we have:
+\begin{align*}
+	a_{k+1}=& c_k\\
+	= & a_k-\lambda_k \varphi_{-}'(a_k).
+\end{align*}
+And, this formula resembles the classical gradient descent formula.\par\medspace
+
+
+
+
+We  describe below two situations in which a gradient descent sequence converges to \textbf{lm}.
+
+\noindent{\textsc{--Situation 1:}} If $n=2p+1$\par
+
+By Corollary 1 we know that:
+\[
+\mathbf{lm}=\mathbf{am},\quad \varphi_{-}'(\mathbf{lm})<0,\quad \varphi_{+}'(\mathbf{lm})>0.
+\]
+Since by construction $a_k\leq \mathbf{lm}\leq b_k,$ we deduce that
+\[
+\varphi_{-}'(a_k)<0 \quad\text{and}\quad \varphi_{+}'(b_k)>0,\quad \forall k\in \N^*,
+\]
+because $x\mapsto \varphi_{-}'(x)$ and $x\mapsto \varphi_{+}'(x)$ are nondecreasing functions.
+If $a_k<b_k,$ then by the gradient descent algorithm we have:
+\begin{align*}
+	c_k=& a_k-r\rho(a_k)\\
+	=& a_k-r\varphi_{-}'(a_k)\quad (\text{definition of}\ \rho )\\
+	=& a_k -\frac{\varphi_{-}'(a_k)}{2m} (b_k-a_k).\quad  (m=\mathtt{length}( M_k))
+\end{align*}
+Because of Proposition 5 we have 
+$0< -\frac{\varphi_{-}'(a_k)}{2m}<1,$ thus we deduce that $c_k \in (a_k,\ b_k).$  This fact shows that the gradient descent sequence
+is a generic sequence. Therefore the sequences $\left(a_k\right)_{k\in \N^*}$ and $\left(b_k\right)_{k\in \N^*}$ converge
+to \textbf{lm.}
+
+\noindent{\textsc{--Situation 2:}} If $n=2p$ and $\mathbf{lm}=\mathbf{gm}$\par 
+In this case we know that $\mathbf{lm}=\mathbf{am},$ so by Theorem 1 we have:
+\[
+\varphi_{-}'(\mathbf{lm})<0,\quad \varphi_{+}'(\mathbf{lm})>0.
+\]
+Therefore, as in the case $n=2p+1$ we have
+\[
+\lim a_k=\mathbf{lm}=\lim b_k.
+\]  
+
+The case $n=2p$ and $\mathbf{lm}<\mathbf{gm} $ is more difficult  to analyze. When this condition is true,
+we know that (see the proof of Theorem 1) 
+\begin{align*}
+	\varphi_{-}'(\mathbf{lm})< & 0,\quad \varphi_{+}'(\mathbf{lm})=0,\\
+	\varphi'(t)= &0,\quad \forall t\in (\mathbf{lm},\ \mathbf{gm}),\\
+	\varphi_{-}'(\mathbf{gm})= & 0,\quad \varphi_{+}'(\mathbf{gm})>0.
+\end{align*}
+Using inequalities and equalities above, we can prove that
+\begin{align*}
+	\varphi_{-}'(t)< & 0,\quad \text{for}\quad t\in (-\infty,\ \mathbf{lm}),\quad  
+	\varphi_{-}'(t)= 0,\quad \text{for}\quad t\in (\mathbf{lm},\ \mathbf{gm}],\quad\\
+	\varphi_{-}'(t)> & 0,\quad \text{for}\quad t\in (\mathbf{gm},\ +\infty).
+\end{align*}
+
+The set $W_0$ defined by 
+\[
+W_0=(\mathbf{lm},\ \mathbf{gm}]
+\] 
+and Definition 4 introduced below play important roles in the rest of this subsection.            
+\begin{definition}
+	A sequence $\left(\mathscr{C}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ is called a mix	sequence if
+	it is built recursively by  Step-c1  and  Step-c2 presented in the supplementary material.
+\end{definition}    
+
+
+
+Lemma 5--7 below will help us to prove some properties of the gradient descent sequence. Their proofs are in the supplementary material.
+
+\begin{lemma} Let $\left(\mathscr{C}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ be a mix sequence.
+	If $n=2p$ and $\mathbf{lm}<\mathbf{gm},$ we have:
+	\[
+	c_1,\ldots,c_q\notin W_0\implies a_1\leq\cdots \leq a_{q+1}\leq \mathbf{lm}<\mathbf{gm}\leq b_{q+1}\leq \cdots \leq b_1.
+	\]
+	
+\end{lemma}	
+
+
+
+\begin{lemma}  Let $\left(\mathscr{C}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ be a mix sequence.
+	If $n=2p$ and $\mathbf{lm}<\mathbf{gm},$ we have:
+	\[
+	a_k<b_k\implies c_k\in (a_k,\ b_k).
+	\]
+\end{lemma}
+
+
+
+\begin{lemma}  Let $\left(\mathscr{C}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ be a mix sequence.
+	If $n=2p$ and $\mathbf{lm}<\mathbf{gm},$ there exists $k_0\in \N^*$ such that:
+	\[
+	c_{k_0}\in (\mathbf{lm},\ \mathbf{gm}].
+	\]
+\end{lemma}
+
+The property of the mix sequence stated in Lemma 7 is also valid for the gradient descent sequence. This Property is given
+in Proposition 6 below. The proof of Proposition 6 is in the supplementary material.
+\begin{proposition}  Let $\left(\mathscr{B}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ be a gradient descent sequence.
+	If $n=2p$ and $\mathbf{lm}<\mathbf{gm},$ there exists $q_0\in \N^*$ such that:
+	\[
+	c_{q_0}\in (\mathbf{lm},\ \mathbf{gm}].
+	\]
+\end{proposition}
+
+
+
+
+Proposition 6 is very important for the gradient descent approach when $n=2p$ and $\mathbf{lm}<\mathbf{gm}.$
+Let $\left(\mathscr{B}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ be a gradient descent sequence and
+set 
+\[
+q_0=\min\{ k,\quad c_k\in (\mathbf{lm},\ \mathbf{gm}]\}.
+\]
+In the implementation of the gradient descent we will only build
+\[
+\left(a_1,b_1,c_1,M_1 \right),\dots,\left(a_{q_0},b_{q_0},c_{q_0},M_{q_0} \right).
+\]
+Because we know how to find $\mathbf{lm}$ and  $\mathbf{gm}$ in $M_{q_0}$ when $c_{q_0}$ is found.
+
+
+
+The gradient descent algorithm is implemented in the program median\_rouen\_gra given in the supplementary material. In Tables 4-6 are presented the
+results of our experimentations  designed to compare matlab median and median\_rouen\_gra. The performance of
+median\_rouen\_gra (relatively to that of matlab median) is grossly similar to that of median\_rouen\_dic.
+Table 4 shows that the runtime of median\_rouen\_gra is better than that of matlab median when the sample size is ``small";
+Table 5 shows superiority of median\_rouen\_gra to matlab median for ``medium" sample sizes; in Table 6 matlab median
+is superior to median\_rouen\_gra when the sample size is 1 million  while
+median\_rouen\_gra performs better than matlab median when the sample size is between 2 million and 8 million.
+
+
+
+
+
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_gra and the build-in matlab median  over $500$ replications.}
+	\label{table4}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{small sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_gra} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=10 & 0.00242  & 0.00268   & 0.9009  \\
+		\midrule
+		n=30 & 0.00272  & 0.00322   & 0.8460 \\
+		\midrule
+		n=50 & 0.00345  & 0.00416   & 0.8288  \\
+		\midrule
+		n=70 & 0.00499  & 0.00692   & 0.7214   \\
+		\midrule
+		n=90 & 0.00435  & 0.00538   & 0.8085  \\
+		\midrule
+		n=110 & 0.00374 & 0.00467   & 0.8007   \\
+		\midrule
+		n=130 & 0.00287 & 0.00361   & 0.7983   \\
+		\midrule
+		n=150 & 0.00411 & 0.00525   & 0.7823    \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_gra and the build-in matlab median  over $500$ replications.}
+	\label{table5}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{Medium sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_gra} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=5000  & 0.03214  & 0.0434  & 0.7396   \\
+		\midrule
+		n=8000  & 0.0496   & 0.0680  & 0.7300  \\
+		\midrule
+		n=11000 & 0.06773  & 0.09323 & 0.7265 \\
+		\midrule
+		n=14000 & 0.08510  & 0.11709 & 0.7267   \\
+		\midrule
+		n=17000 & 0.10142  & 0.13994 & 0.7248  \\
+		\midrule
+		n=20000 & 0.11921  & 0.16434 & 0.7254  \\
+		\midrule
+		n=23000 & 0.13600  & 0.18849 & 0.7215  \\
+		\midrule
+		n=26000 & 0.15546  & 0.21637 & 0.7185   \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_grad and the build-in matlab median  over $500$ replications.}
+	\label{table6}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{large sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_gra} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=1000000 &  9.3371  &  8.8944  &  1.0498  \\
+		\midrule
+		n=2000000 &  16.9671 &  18.9463 &  0.8955 \\
+		\midrule
+		n=3000000 & 25.3496  & 28.5725 &  0.8872  \\
+		\midrule
+		n=4000000 & 39.4218  & 45.5724 &  0.8650   \\
+		\midrule
+		n=5000000 & 56.9510  & 67.5012 &  0.8437   \\
+		\midrule
+		n=6000000 & 67.8968  & 79.9994 &  0.8487  \\
+		\midrule
+		n=7000000 & 78.2593  & 93.1864 &  0.8398   \\
+		\midrule
+		n=8000000 & 90.1274  & 106.5925 & 0.8455   \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+A comparison of the third columns of Tables 1-3 and those of Tables 4-5 reveals that the performance of median\_rouen\_gra
+is superior to that of median\_rouen\_dic. 
+
+
+
+\subsection{Truncated gradient descent }\label{sec:4.2}
+
+This approach is a modification of the gradient descent method. In this subsection, we only mention how the gradient descent is modified.
+Let $\left(\mathscr{G}_k=\left(a_k,b_k,c_k,M_k \right),\quad k\in \N^*\right)$ be the gradient descent sequence, let us
+recall how $c_k$ is ``chosen" in $(a_k,\ b_k)$ when  $ \varphi_{-}'(a_k)<0\quad\text{and}\quad \varphi_{+}'(b_k)>0$: $c_k$ is given
+by 
+\[
+c_k=a_k+h_k (b_k-a_k)\quad\text{where}\quad h_k=-\left(\frac{\varphi_{-}'(a_k)}{2m_k}\right),\quad
+m_k=\mathtt{length}(M_k).
+\]
+Let us also recall the following vectors useful in the sequel:
+\[
+R=R_k=\left(M_k\geq c_k\right),\quad  L=L_k=\left(M_k< c_k\right).
+\]
+It follows from the formula of $c_k$ that, if $h_k$ is close to 1, then $c_k$ is close $b_k.$ When $c_k$ is close
+to $b_k$ the likelihood of getting $ R=R_k=\emptyset$ is high. And, when $R=\emptyset$ we know that
+\[
+b_{k+1}=\max(L)
+\]
+thus the computation of $b_{k+1}$  is time consuming. If $h_k$ is close to 0, the risk of getting $ L=L_k=\emptyset$
+is also high. When $L=\emptyset$ the computation of $a_{k+1}$ is costly. To avoid these situations from happening,
+we truncate $h_k$ in the following manner. Let $\alpha\in(0,\ \frac{1}{2})$ we set
+\[
+\bar{h}_k = \begin{cases} \alpha, & \text{if}\quad h_k < \alpha, \\ 
+	h_k, & \text{if}\quad\alpha \leq h_k\leq 1-\alpha, \\
+	1-\alpha, &\text{if}\quad h_k > 1-\alpha, 
+\end{cases} 
+\]
+and, $c_k$ in the truncated gradient descent is defined by
+\[
+c_k=a_k+\bar{h}_k (b_k-a_k).
+\]
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_tru and the build-in matlab median  over $500$ replications.}
+	\label{table7}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{small sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_tru} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=10 & 0.00273 &  0.00303 &   0.9004   \\
+		\midrule
+		n=30 & 0.00409 &  0.00452 &   0.9047   \\
+		\midrule
+		n=50 & 0.00451 &  0.00508 &   0.8863    \\
+		\midrule
+		n=70 & 0.0035  &  0.00402 &   0.8829    \\
+		\midrule
+		n=90 & 0.00332 &  0.00374 &   0.8867    \\
+		\midrule
+		n=110 & 0.00424 &  0.00477 &  0.8883  \\
+		\midrule
+		n=130 & 0.00388 &  0.00439 &  0.8838   \\
+		\midrule
+		n=150 & 0.00345 &  0.00391 &  0.8832     \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_tru and the build-in matlab median  over $500$ replications.}
+	\label{table8}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{Medium sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_tru} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=5000 &  0.04099 &  0.04355  & 0.9412  \\
+		\midrule
+		n=8000 &  0.06385 &  0.06744  & 0.9468   \\
+		\midrule
+		n=11000 & 0.08767 &  0.09318  & 0.9409   \\
+		\midrule
+		n=14000&  0.10894 &  0.11599  & 0.9392  \\
+		\midrule
+		n=17000 & 0.13220 &  0.14026  & 0.9425  \\
+		\midrule
+		n=20000 & 0.15422 &  0.16433  & 0.9385   \\
+		\midrule
+		n=23000 & 0.17664 &  0.18831  & 0.9380  \\
+		\midrule
+		n=26000 & 0.19900 &  0.21225  & 0.9375   \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+
+
+
+\begin{table}[!htbp]
+	\caption{Runtimes in seconds of  median\_rouen\_tru and the build-in matlab median  over $500$ replications.}
+	\label{table9}
+	\begin{tabular}{lccc}
+		\toprule
+		\multicolumn{4}{c}{\textsc{Uniform over $(0,\ 1)$\quad\textit{large sample sizes}} }\\
+		\toprule
+		{} & \specialcell{Time of\\ median\_rouen\_tru} & \specialcell{Time of \\ matlab median} & Ratio\\
+		\midrule
+		n=1000000 & 7.60236   &   8.61220  & 0.8827  \\
+		\midrule
+		n=2000000  & 15.61259 &  17.92161  & 0.8711 \\
+		\midrule
+		n=3000000  & 23.21215 &  27.04747  & 0.8582   \\
+		\midrule
+		n=4000000 &  32.82092 &  38.50883  & 0.8523   \\
+		\midrule
+		n=5000000  & 50.79466 &  62.04248  & 0.8187  \\
+		\midrule
+		n=6000000  & 68.00246 &  86.36158  & 0.7874   \\
+		\midrule
+		n=7000000 &  73.83915 & 90.48521   & 0.8160 \\
+		\midrule
+		n=8000000 &  82.72599 & 101.02673  & 0.8188  \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+The truncated gradient descent algorithm is implemented in the matlab (mex) program median\_rouen\_tru presented
+in the supplementary material. In Tables 7--9 are summarized our computations regarding the truncated gradient descent method.
+These tables reveal that the runtime of  median\_rouen\_tru is better than that of the built-in matlab median for
+all samples sizes.
+
+The truncation parameter $\alpha$ used in the truncated method is supposed to satisfy $0<\alpha<\frac{1}{2}.$ 
+If we ``choose" $\alpha=\frac{1}{2}$ we get the dichotomic approach, if $\alpha=0$ we get the ``plain gradient" algorithm.
+This observation shows that each one of our approaches can be considered a special case of the truncated gradient method.
+When the samples sizes are ``small'' the best results are obtained by plain gradient  and the  
+truncated gradient. The best results
+are obtained by the plain gradient  approach and dichotomy when the samples sizes are ``medium'', and the ``truncated gradient" has 
+the best results when $n$ is ``large." Those facts  suggest that we should ``choose'' $\alpha$  as a function of the sample size.
+We hope to consider the problem of selecting $\alpha=\alpha_n$ in a future paper.
+
+
+
+
+
+
+
+Assume that the medians compute by the matlab build-in function are stored in the vector
+$V_{mat}=(u_1,\ldots,u_r),$ where $r$ is the number of replications. Similarly suppose that
+the medians computed by median\_rouen\_dic (respectively median\_rouen\_grad, median\_rouen\_tru) are stored in the
+vector $V_{rou}=(v_1,\ldots,v_r).$ In the simulations we have also computed the quantities:
+\[
+Error=\sum_{i=1}^{r} (u_i-v_i)^2.
+\]
+These quantities are not reported because they are all equal to zero. This shows that the methods introduced in this paper
+give the same results as the matlab build-in function.
+
+The authors report there are no competing interests to declare.
+
+Data sharing is not applicable to this article. The data used in this
+paper are RANDOM samples generated by Matlab software, thus can be
+created by any reader.
+
+\protect\phantomsection\label{refs}
+\begin{CSLReferences}{1}{1}
+\bibitem[\citeproctext]{ref-AzPeTo:23}
+Azzini, Ivano, Domenico Perrotta, and Francesca Torti. 2023. \emph{A
+Practically Efficient Fixed-Pivot Selection Algorithm and Its Extensible
+MATLAB Suite}. \url{https://arxiv.org/abs/2302.05705}.
+
+\bibitem[\citeproctext]{ref-Hoa:61}
+Hoare, C. A. R. 1961. {``Algoritm 65: Find.''} \emph{Communications of
+the ACM} 4 (7): 321--22.
+
+\bibitem[\citeproctext]{ref-HuYaTa:79}
+Huang, T., G. Yang, and G. Tang. 1979. {``A Fast Two-Dimensional Median
+Filtering Algorithm.''} \emph{Acoustics, Speech and Signal Processing,
+IEEE Transactions on} 27 (1): 13--18.
+\url{https://doi.org/10.1109/TASSP.1979.1163188}.
+
+\bibitem[\citeproctext]{ref-Ma:19}
+Ma, Wing-Kin (Ken). 2019. \emph{Subgradient Methods}.
+\url{https://arxiv.org/abs/0806.3301}.
+
+\bibitem[\citeproctext]{ref-NoGa:82}
+Nodes, T., and N. Gallagher. 1982. {``Median Filters: Some Modifications
+and Their Properties.''} \emph{IEEE Transactions on Acoustics, Speech,
+and Signal Processing} 30 (5): 739--46.
+\url{https://doi.org/10.1109/TASSP.1982.1163951}.
+
+\bibitem[\citeproctext]{ref-Sat:22}
+Satman, Mehmet Hakan. 2022. {``{Teaching the Median with Terms of
+Absolute Value, Differentiability, and Optimization}.''}
+\emph{Alphanumeric Journal} 10 (1): 41--50.
+https://doi.org/\url{https://doi.org/10.17093/}.
+
+\bibitem[\citeproctext]{ref-Ste:85}
+Stewart, Robert R. 1985. {``{Median Filtering: Review and a new f/k
+analogue design }.''} \emph{Journal of the Canadian Society of
+Exploration Geophysicists} 21 (1): 54--63.
+
+\bibitem[\citeproctext]{ref-Tib:09}
+Tibshirani, Ryan J. 2009. \emph{Fast Computation of the Median by
+Successive Binning}. \url{https://arxiv.org/abs/0806.3301}.
+
+\bibitem[\citeproctext]{ref-Tib:17}
+Tibshirani, Ryan J. 2017. \emph{Subgradient Method, Convex Optimization
+10-725}. \url{https://arxiv.org/abs/0806.3301}.
+
+\bibitem[\citeproctext]{ref-YINeALL:96}
+Yin, Lin, Ruikang Yang, M. Gabbouj, and Y. Neuvo. 1996. {``Weighted
+Median Filters: A Tutorial.''} \emph{IEEE Transactions on Circuits and
+Systems II: Analog and Digital Signal Processing} 43 (3): 157--92.
+\url{https://doi.org/10.1109/82.486465}.
+
+\end{CSLReferences}
+
+
+
+
+\end{document}
