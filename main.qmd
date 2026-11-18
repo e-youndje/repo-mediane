@@ -439,14 +439,6 @@ median for "medium\" sample sizes.
 |                |    median_rouen_dic  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_dic   |   median_rouen_dic |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table1}          |   {#table1}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=10           | 0.00278              | 0.00287            | 0.9676         |
 +----------------+----------------------+--------------------+----------------+
@@ -476,14 +468,6 @@ over $500$ replications. {#table1}
 |                |    median_rouen_dic  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_dic   |   median_rouen_dic |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table2}          |   {#table2}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=5000         | 0.04232              | 0.04650            | 0.9102         |
 +----------------+----------------------+--------------------+----------------+
@@ -513,14 +497,6 @@ over $500$ replications. {#table2}
 |                |    median_rouen_dic  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_dic   |   median_rouen_dic |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table3}          |   {#table3}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=1000000      | 10.2957              | 8.8177             | 1.1676         |
 +----------------+----------------------+--------------------+----------------+
@@ -779,14 +755,6 @@ is between 2 million and 8 million.
 |                |    median_rouen_gra  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_gra   |   median_rouen_gra |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table4}          |   {#table4}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=10           | 0.00242              | 0.00268            | 0.9009         |
 +----------------+----------------------+--------------------+----------------+
@@ -816,14 +784,6 @@ over $500$ replications. {#table4}
 |                |    median_rouen_gra  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_gra   |   median_rouen_gra |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table5}          |   {#table5}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=5000         | 0.03214              | 0.0434             | 0.7396         |
 +----------------+----------------------+--------------------+----------------+
@@ -853,14 +813,6 @@ over $500$ replications. {#table5}
 |                |    median_rouen_gra  |    matlab median    |                |
 |                |   ------------------ |   ---------------   |                |
 |                |                      |                     |                |
-|                |   : Runtimes in      |   : Runtimes in     |                |
-|                |   seconds of         |   seconds of        |                |
-|                |   median_rouen_grad  |   median_rouen_grad |                |
-|                |   and the build-in   |   and the build-in  |                |
-|                |   matlab median over |   matlab median     |                |
-|                |   $500$              |   over $500$        |                |
-|                |   replications.      |   replications.     |                |
-|                |   {#table6}          |   {#table6}         |                |
 +----------------+----------------------+---------------------+----------------+
 | n=1000000      | 9.3371               | 8.8944              | 1.0498         |
 +----------------+----------------------+---------------------+----------------+
@@ -921,14 +873,6 @@ descent is defined by $$c_k=a_k+\bar{h}_k (b_k-a_k).$$
 |                |    median_rouen_tru  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_tru   |   median_rouen_tru |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table7}          |   {#table7}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=10           | 0.00273              | 0.00303            | 0.9004         |
 +----------------+----------------------+--------------------+----------------+
@@ -958,14 +902,6 @@ over $500$ replications. {#table7}
 |                |    median_rouen_tru  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_tru   |   median_rouen_tru |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table8}          |   {#table8}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=5000         | 0.04099              | 0.04355            | 0.9412         |
 +----------------+----------------------+--------------------+----------------+
@@ -995,14 +931,6 @@ over $500$ replications. {#table8}
 |                |    median_rouen_tru  |    matlab median   |                |
 |                |   ------------------ |   ---------------  |                |
 |                |                      |                    |                |
-|                |   : Runtimes in      |   : Runtimes in    |                |
-|                |   seconds of         |   seconds of       |                |
-|                |   median_rouen_tru   |   median_rouen_tru |                |
-|                |   and the build-in   |   and the build-in |                |
-|                |   matlab median over |   matlab median    |                |
-|                |   $500$              |   over $500$       |                |
-|                |   replications.      |   replications.    |                |
-|                |   {#table9}          |   {#table9}        |                |
 +----------------+----------------------+--------------------+----------------+
 | n=1000000      | 7.60236              | 8.61220            | 0.8827         |
 +----------------+----------------------+--------------------+----------------+
